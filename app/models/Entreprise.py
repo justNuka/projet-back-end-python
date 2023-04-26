@@ -1,22 +1,19 @@
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+# System imports
+from enum import Enum
+# Libs imports
+from pydantic import BaseModel
 
-db = SQLAlchemy()
-
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(255), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=False)
-    first_name = db.Column(db.String(255), nullable=False)
-    last_name = db.Column(db.String(255), nullable=False)
+class Entreprise(BaseModel):
+    id_entreprise: int = None
+    firm: str
+    location: str
 
 
-class Entreprise(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
-
-
-class Planning(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    start_time = db.Column(db.DateTime, nullable=False)
-    end_time = db.Column(db.DateTime, nullable=False)
+class EntrepriseOptionnalFields(BaseModel):
+    name: str = None
+    surname: str = None
+    email: str = None
+    password_hash: str = None
+    tel: str = None
+    newsletter: bool = None
+    is_client: bool = None
